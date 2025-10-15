@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>一条咸鱼  · 李开开</title>
+    <meta name="description" content="一条咸鱼 · 李开开的静态主页，包含卡片轮播与海洋背景动效。">
+    <meta name="keywords" content="Likaikai, 咸鱼, 个人主页, 博客, 静态站点">
+    <meta name="author" content="Likaikai">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="一条咸鱼 · 李开开">
+    <meta property="og:description" content="一条咸鱼 · 李开开的静态主页，包含卡片轮播与海洋背景动效。">
+    <meta property="og:url" content="https://blog.erzip.cn">
+    <meta property="og:image" content="images/share.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="一条咸鱼 · 李开开">
+    <meta name="twitter:description" content="一条咸鱼 · 李开开的静态主页，包含卡片轮播与海洋背景动效。">
+    <meta name="twitter:image" content="images/share.png">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      let gilded_effect_Selector = '#gold-blog';
+      let gilded_effect_FontSize = '16';
+      let gilded_effect = '我的博客';
+      let gilded_effect_Style = '0';
+    </script>
+    <script defer src="gilded_effect.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">跳到主要内容</a>
+    <div id="ocean-bg" aria-hidden="true"></div>
+    <main class="layout" id="main">
+      <aside class="info" aria-labelledby="brand-title">
+        <h1 id="brand-title" class="info__brand">我是 咸鱼 · 李开开 🐟</h1>
+        <p class="info__tagline">古法运维传承人 · 开源爱好者<br><span class="ocean-text ocean-wave" id="oceanLine"><・ 一条自在遨游在云原生海洋的的普通咸鱼 )))>«</span></p>
+
+        <div style="margin:6px 0 6px; color:rgba(255,255,255,.9); font-weight:600">我略懂并十分感兴趣的方向:</div>
+        <ul class="bullets" aria-label="兴趣方向列表">
+          <li>运维实施：Linux / Shell，自动化、监控告警</li>
+          <li>私有化交付：环境部署，集群搭建，交付文档</li>
+          <li>云原生：Docker / K8s / Helm</li>
+          <li>后端开发：Python，API 集成</li>
+          <li>数据库：MySQL，Redis，MongoDB</li>
+          <li>··· ···</li>
+        </ul>
+        <div style="height:10px"></div>
+        <p style="margin:8px 0 10px; color:rgba(255,255,255,.86)">右边卡片查看我的全部站点，或进入<span id="gold-blog">我的博客</span>：</p>
+        <a class="arrow-link" href="https://blog.erzip.cn" target="_blank" rel="noopener noreferrer" aria-label="进入我的博客">
+          <svg class="arrow" width="100" height="26" viewBox="0 0 100 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M8 13 H70 M70 13 L92 13 M92 13 L84 7 M92 13 L84 19" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </aside>
+
+      <section
+        class="cards"
+        id="carousel"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="作品卡片轮播"
+        tabindex="0"
+        data-active-index="0"
+      >
+        <div class="sr-only" aria-live="polite" id="carousel-live">第 1 张，共 5 张</div>
+
+        <div class="cards__stack" id="cardsStack">
+          <article class="card" data-index="0" data-pos="0" aria-roledescription="slide" aria-label="第 1 张，共 5 张">
+            <div class="card__image"><img src="images/blog.png" alt="博客站点预览图" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="card__panel">
+              <div class="panel__header">
+                <div class="avatar" style="background-image:url('images/favicon-dullfish-o.jpg')"></div>
+                <div class="meta">
+                  <div class="meta__title"><a class="meta__link" href="https://blog.erzip.cn" target="_blank" rel="noopener noreferrer" title="前往咸鱼博客">Rainbowshark · 咸鱼博客</a></div>
+                  <div class="meta__sub">2025-09-28 · 站点时间</div>
+                </div>
+              </div>
+              <ul class="panel__list">
+                <li>这里是关于网站的一些自定义描述</li>
+                <li>可替换为头像、昵称、日期与图标。</li>
+                <li>此处列表高度约占面板的 60%。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-index="1" data-pos="-1" aria-roledescription="slide" aria-label="第 2 张，共 5 张">
+            <div class="card__image"><img src="images/draw.png" alt="咸鱼画板预览图" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="card__panel">
+              <div class="panel__header">
+                <div class="avatar" style="background-image:url('images/favicon-bluefish-o.jpg')"></div>
+                <div class="meta">
+                  <div class="meta__title"><a class="meta__link" href="https://draw.erzip.cn" target="_blank" rel="noopener noreferrer" title="前往咸鱼画板">Purplefish · 咸鱼画板</a></div>
+                  <div class="meta__sub">2025-09-28 · 站点时间</div>
+                </div>
+              </div>
+              <ul class="panel__list">
+                <li>面板仅在中间激活卡显示，其它侧卡隐藏。</li>
+                <li>占位文案用于演示排版节奏。</li>
+                <li>可放置若干条目。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-index="2" data-pos="-2" aria-roledescription="slide" aria-label="第 3 张，共 5 张">
+            <div class="card__image"><img src="images/share.png" alt="文件中转站预览图" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="card__panel">
+              <div class="panel__header">
+                <div class="avatar" style="background-image:url('images/favicon-rainbowshark-o.jpg')"></div>
+                <div class="meta">
+                  <div class="meta__title"><a class="meta__link" href="https://share.erzip.cn" target="_blank" rel="noopener noreferrer" title="前往文件中转站">Greenfish · 文件中转站</a></div>
+                  <div class="meta__sub">2025-09-28 · 站点时间</div>
+                </div>
+              </div>
+              <ul class="panel__list">
+                <li>这是一段占位描述，强调视觉层级。</li>
+                <li>配色与阴影尽量贴近截图观感。</li>
+                <li>交互支持拖拽、滚轮与方向键。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-index="3" data-pos="-3" aria-roledescription="slide" aria-label="第 4 张，共 5 张">
+            <div class="card__image"><img src="images/efish.png" alt="电子木鱼页面预览图" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="card__panel">
+              <div class="panel__header">
+                <div class="avatar" style="background-image:url('images/favicon-greenfish-o.jpg')"></div>
+                <div class="meta">
+                  <div class="meta__title"><a class="meta__link" href="https://efish.erzip.cn" target="_blank" rel="noopener noreferrer" title="前往站点监控">Dullfish · 电子木鱼</a></div>
+                  <div class="meta__sub">2025-09-28 · 站点时间</div>
+                </div>
+              </div>
+              <ul class="panel__list">
+                <li>采用 0.72 纵横比与 78vh 高度上限。</li>
+                <li>边角圆润 20–24px，阴影柔和。</li>
+                <li>配有极浅黑色渐变掩膜以提升可读性。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-index="4" data-pos="-4" aria-roledescription="slide" aria-label="第 5 张，共 5 张">
+            <div class="card__image"><img src="images/avatar.png" alt="头像生成器预览图" loading="lazy" onerror="this.style.display='none'"></div>
+            <div class="card__panel">
+              <div class="panel__header">
+                <div class="avatar" style="background-image:url('images/favicon-purplefish-o.jpg')"></div>
+                <div class="meta">
+                  <div class="meta__title"><a class="meta__link" href="https://avatar.erzip.cn" target="_blank" rel="noopener noreferrer" title="前往个人文档">Bluefish · 头像生成器</a></div>
+                  <div class="meta__sub">2025-09-28 · 站点时间</div>
+                </div>
+              </div>
+              <ul class="panel__list">
+                <li>支持循环切换与边界回弹处理。</li>
+                <li>尊重系统“减少动效”偏好。</li>
+                <li>键盘左右键在聚焦时可切换。</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <div class="site-signature" role="contentinfo">Made by <a href="https://github.com/lkkone" target="_blank" rel="noopener noreferrer">Likaikai</a></div>
+    <script>
+      (function(){
+        var el = document.getElementById('oceanLine');
+        if(!el) return;
+        var text = el.textContent;
+        var frag = document.createDocumentFragment();
+        el.textContent = '';
+        var parts;
+        try{
+          if (window.Intl && Intl.Segmenter){
+            var seg = new Intl.Segmenter(undefined, { granularity:'grapheme' });
+            parts = Array.from(seg.segment(text), function(s){ return s.segment; });
+          } else {
+            parts = Array.from(text);
+          }
+        }catch(_){ parts = Array.from(text); }
+        for(var i=0;i<parts.length;i++){
+          var span = document.createElement('span');
+          span.className = 'ocean-ch';
+          span.style.setProperty('--idx', i);
+          span.textContent = parts[i];
+          frag.appendChild(span);
+        }
+        el.appendChild(frag);
+      })();
+    </script>
+  </body>
+</html>
+
+

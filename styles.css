@@ -1,0 +1,205 @@
+:root{
+  --bg-1:#1a2ae8;
+  --bg-2:#6a1b9a;
+  --bg-vignette:rgba(0,0,0,.25);
+  --card-bg:#fff;
+  --card-radius:22px;
+  --shadow-lg:0 20px 50px rgba(0,0,0,.25);
+  --shadow-md:0 12px 30px rgba(0,0,0,.18);
+  --text-primary:rgba(255,255,255,.92);
+  --text-secondary:rgba(255,255,255,.75);
+  --pill-bg:#ffffff;
+  --pill-danger:#ff3b30;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+  line-height:1.6;
+  color:var(--text-primary);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(135deg, #0b1a4d 0%, #0c2b6f 50%, #0a1d4f 100%);
+  min-height:100vh;
+  overflow:hidden;
+}
+.skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+.skip-link:focus{left:12px; top:12px; width:auto; height:auto; padding:8px 12px; background:#0b2a6b; color:#fff; border-radius:6px; z-index:1000}
+.site-signature{position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:10; color:rgba(255,255,255,.52); font-size:13px; pointer-events:auto}
+.site-signature a{color:inherit; text-decoration:none; border-bottom:none}
+.site-signature a:hover{color:rgba(255,255,255,.72); text-decoration:none; border-bottom:none}
+.ocean-waves{position:absolute; left:0; right:0; top:0; bottom:0; overflow:hidden}
+
+/* 背景海洋环境（朦胧、波纹、漂浮光） */
+#ocean-bg{position:fixed; inset:0; z-index:0; pointer-events:none}
+#ocean-bg::before,#ocean-bg::after{content:""; position:absolute; inset:-20%; background:radial-gradient(closest-side, rgba(28,101,240,.18), rgba(28,101,240,0) 70%); filter:blur(40px); animation:floatBlob 22s ease-in-out infinite alternate}
+#ocean-bg::after{background:radial-gradient(closest-side, rgba(0,212,255,.14), rgba(0,212,255,0) 70%); animation-duration:28s; animation-delay: -6s}
+@keyframes floatBlob{0%{transform:translate(-8%, -6%) scale(1)}50%{transform:translate(12%, 8%) scale(1.15)}100%{transform:translate(-10%, 4%) scale(0.95)}}
+
+/* 远处波纹（叠加多层渐变+噪点） */
+#ocean-bg{background:
+  radial-gradient(1200px 800px at 30% 60%, rgba(255,255,255,.06), transparent 60%),
+  radial-gradient(800px 600px at 70% 40%, rgba(0, 180, 255, .05), transparent 60%),
+  repeating-radial-gradient(circle at 50% 110%, rgba(255,255,255,.03) 0 2px, transparent 2px 6px),
+  linear-gradient(180deg, rgba(0,0,30,.6) 0%, rgba(0,20,60,.6) 100%)}
+
+
+@media (prefers-reduced-motion: reduce){
+  #ocean-bg::before,#ocean-bg::after{animation:none}
+  
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:minmax(480px, clamp(36vw, 37vw, 640px)) 1fr;
+  gap:clamp(24px,2.6vw,40px);
+  padding:clamp(48px,4.2vw,60px) clamp(40px,4vw,72px);
+  height:100vh;
+  align-items:center;
+}
+
+/* 左侧信息区 */
+.info{padding-left:clamp(80px,7vw,160px); position:relative; z-index:1}
+.info::before{content:none}
+.info{ text-shadow:0 1px 2px rgba(0,0,0,.28) }
+.info__brand{
+  margin:0 0 8px 0;
+  font-weight:700;
+  font-size:clamp(36px,3vw,56px);
+  letter-spacing:.5px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  height:clamp(24px,1.6vw,28px);
+  padding:0 10px;
+  margin-left:10px;
+  border-radius:9999px;
+  background:rgba(255,255,255,.9);
+  color:#1a1a1a;
+  font-size:12px;
+  line-height:1;
+}
+.info__tagline{color:var(--text-secondary); margin:8px 0 18px; font-size:clamp(14px, 1.4vw, 18px)}
+/* 海洋流动（渐变版，作为兜底） */
+.ocean-text{
+  display:inline-block;
+  background: linear-gradient(90deg,
+    #0b2a6b 0%, #13419a 12%, #1e4fbf 24%, #2b6ff0 38%, #2b82ff 50%, #21b9ff 66%, #7ddcff 82%, #e6f5ff 100%
+  );
+  background-size: 400% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: oceanFlow 6s ease-in-out infinite alternate;
+  will-change: background-position;
+  white-space: nowrap;
+}
+@keyframes oceanFlow{ 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+
+/* 海洋流动（字符逐次高亮版） */
+.ocean-text.ocean-wave{ background:none; -webkit-text-fill-color:initial; color:inherit; animation:none }
+.ocean-text.ocean-wave .ocean-ch{
+  display:inline-block;
+  color:#9ec3ff;
+  text-shadow:0 0 0 rgba(79,163,255,0);
+  animation:oceanCharWave 2200ms ease-in-out infinite;
+  animation-delay:calc(var(--idx, 0) * 90ms);
+}
+@keyframes oceanCharWave{
+  0%,100%{ color:#8fb8ff; text-shadow:0 0 0 rgba(79,163,255,0) }
+  35%{ color:#d8ecff; text-shadow:0 0 6px rgba(79,163,255,.35) }
+  50%{ color:#18c8ff; text-shadow:0 0 10px rgba(32,178,255,.55) }
+  65%{ color:#d8ecff; text-shadow:0 0 6px rgba(79,163,255,.35) }
+}
+@media (prefers-reduced-motion: reduce){
+  .ocean-text{ animation: none; }
+  .ocean-text.ocean-wave .ocean-ch{ animation: none; }
+}
+
+.price-row{display:flex; align-items:center; gap:12px; margin:8px 0 14px}
+.price{font-size:clamp(28px,2vw,36px); font-weight:700}
+.pill{display:inline-flex; align-items:center; height:22px; padding:0 10px; border-radius:9999px; background:var(--pill-bg); color:#222; font-size:12px}
+.pill--danger{background:var(--pill-danger); color:#fff}
+.pill--strike{text-decoration:line-through; text-decoration-thickness:2px}
+.price-equal{color:rgba(255,255,255,.9); font-weight:600}
+
+.countdown{margin:6px 0 10px; color:rgba(255,255,255,.82); font-size:14px}
+
+.actions{display:flex; gap:clamp(12px,1vw,16px); margin:10px 0 22px}
+.btn{height:clamp(40px,2.4vw,44px); padding:0 clamp(20px,1.6vw,28px); border-radius:9999px; border:1px solid rgba(255,255,255,.55); background:transparent; color:#fff; cursor:pointer; backdrop-filter:saturate(120%) contrast(105%)}
+.btn:focus{outline:2px solid rgba(255,255,255,.8); outline-offset:2px}
+.btn--primary{background:#fff; color:#111; border-color:#fff; box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.btn--ghost{background:transparent}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+
+/* 箭头按钮动画 */
+.arrow-link{position:relative; display:inline-block; width:92px; height:26px; margin-top:6px; color:#fff; text-decoration:none; pointer-events:auto;}
+.arrow-link .arrow{display:block}
+.arrow-link{animation:nudgeX 1.8s ease-in-out infinite}
+.arrow-link:hover{filter:brightness(1.08)}
+@keyframes nudgeX{0%{transform:translateX(-6px)}50%{transform:translateX(6px)}100%{transform:translateX(-6px)}}
+
+.bullets{list-style:disc; padding-left:18px; margin:10px 0 0; color:rgba(255,255,255,.88)}
+.bullets li{margin:2px 0; font-size:clamp(14px,1vw,16px)}
+
+/* 右侧卡片栈 */
+.cards{position:relative; height:100%; display:flex; align-items:center; justify-content:flex-end; padding-right:clamp(32px,2.5vw,48px)}
+.cards:focus{outline:none}
+.cards__stack{position:relative; perspective:1200px; transform-style:preserve-3d; width:clamp(260px, 56vmin, 680px); aspect-ratio:3/4; margin-right:clamp(48px, 8vw, 140px)}
+
+.card{position:absolute; inset:0; border-radius:18px; overflow:hidden; user-select:none; background:rgba(17,26,72,.6); border:1px solid rgba(255,255,255,.08); box-shadow:0 24px 80px rgba(0,0,0,.45); transform-origin:center 80%}
+.card__image{position:absolute; left:0; right:0; top:0; height:54%}
+.card__image img{width:100%; height:100%; object-fit:cover; object-position:center; display:block}
+.card__image::after{content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,0) 55%)}
+
+.card__panel{position:absolute; left:0; right:0; bottom:0; height:46%; background:linear-gradient(180deg, rgba(255,255,255,.15) 0%, rgba(12,19,62,.65) 30%, rgba(10,16,54,.9) 100%); color:#eaf1ff; border-top-left-radius:0; border-top-right-radius:0; padding-top:0; box-shadow:none; transform:translateY(0); opacity:1; backdrop-filter:blur(6px)}
+
+.panel__header{display:flex; gap:12px; padding:16px 18px 10px}
+.avatar{width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.1)); background-size:cover; background-position:center; background-repeat:no-repeat}
+.meta__title{font-weight:700; color:#eaf1ff; font-size:clamp(14px, 1.1vw, 16px)}
+.meta__title .meta__link{display:inline-block; color:inherit; text-decoration:none; padding:2px 6px; border-radius:8px; border:1px solid transparent; background:transparent; transition:color 160ms ease, border-color 160ms ease}
+.meta__title .meta__link:hover{text-decoration:none; border-color:currentColor; background:transparent}
+/* 按卡片主题颜色高亮（hover） */
+.cards__stack .card[data-index="0"] .meta__title .meta__link:hover{color:#c0c0c0} /* 首页 dullfish */
+.cards__stack .card[data-index="1"] .meta__title .meta__link:hover{color:#2b82ff} /* 个人 bluefish */
+.cards__stack .card[data-index="2"] .meta__title .meta__link:hover{color:#ff7a59; background:linear-gradient(90deg,#ff7a59,#ffd166,#7bdcb5,#4bc0ff,#a29bfe); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent} /* 博客 rainbow-like */
+.cards__stack .card[data-index="3"] .meta__title .meta__link:hover{color:#34c759}
+.cards__stack .card[data-index="4"] .meta__title .meta__link:hover{color:#a855f7} /* 文档 purplefish */
+.meta__sub{color:#cfe0ff; font-size:clamp(12px, .9vw, 13.5px); opacity:.9}
+.panel__list{margin:6px 0 0; padding:0 18px 16px 40px; list-style:disc; color:#e5eeff; font-size:clamp(13px, 1.1vw, 15px)}
+.panel__list li{margin:6px 0; opacity:.9}
+
+/* 位置与3D初始值，通过 data-pos 控制 */
+.card{transition:transform 480ms cubic-bezier(.22,1,.36,1), opacity 300ms ease, box-shadow 480ms cubic-bezier(.22,1,.36,1)}
+
+.cards__stack{--drag-x:0; --drag-r:0}
+/* 垂直层叠映射：0 为主卡，其余按 -1..-4 依次后退 */
+.card[data-pos="0"]{transform:translateX(calc(0px + var(--drag-x))) rotate(calc(0deg + var(--drag-r)*.15)) translateY(0) scale(1); z-index:5; opacity:1}
+.card[data-pos="-1"]{transform:translateX(18px) rotate(3deg) translateY(12px) scale(.97); z-index:4; opacity:.95}
+.card[data-pos="-2"]{transform:translateX(36px) rotate(5deg) translateY(24px) scale(.94); z-index:3; opacity:.92}
+.card[data-pos="-3"]{transform:translateX(56px) rotate(7deg) translateY(40px) scale(.91); z-index:2; opacity:.88}
+.card[data-pos="-4"]{transform:translateX(78px) rotate(9deg) translateY(58px) scale(.88); z-index:1; opacity:.85}
+
+/* 可拖拽光标 */
+.cards.grabbable{cursor:grab}
+.cards.grabbing{cursor:grabbing}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card{transition:opacity 260ms ease}
+}
+
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+/* 视口自适应比例 */
+@media (max-width: 1440px){
+  .layout{gap:24px}
+}
+
+

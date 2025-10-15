@@ -7,7 +7,7 @@
 
 ## 目录结构
 ```
-info_v2/
+yuhome/
   ├─ index.html
   ├─ styles.css
   ├─ app.js
